@@ -1,0 +1,35 @@
+{
+    "dark": 
+    {
+    "root": "#3A3A3A",
+    "title1_fg": "#ffffff",
+    "title2_fg": "#f7da88",
+    "title3_fg": "#b1f788",
+    "title4_fg": "#ffffff",
+    "label_choose_fg": "#ffffff",
+    "label_farm_fg": "#ffffff",
+    "folder": "0"
+    },
+    "wood":
+    {
+    "root": "#8f7b5c",
+    "title1_fg": "#000000",
+    "title2_fg": "#ffa010",
+    "title3_fg": "#87c464",
+    "title4_fg": "#000000",
+    "label_choose_fg": "#ffffff",
+    "label_farm_fg": "#ffffff",
+    "folder": "1"
+    },
+    "ice":
+    {
+    "root": "#a5b1f3",
+    "title1_fg": "#000000",
+    "title2_fg": "#1093ff",
+    "title3_fg": "#d0e6f0",
+    "title4_fg": "#000000",
+    "label_choose_fg": "#ffffff",
+    "label_farm_fg": "#ffffff",
+    "folder": "2"
+    }
+}
