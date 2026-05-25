@@ -4,7 +4,7 @@ def main(folder = None, farm_name = None):
     os.chdir(f'C:/Users/{os.environ.get('USERNAME')}/AppData/Roaming/StardewValley/Saves')
     try:
         if folder.isnumeric() and len(folder) != 9: print('ID須為9位數字')
-    except:
+    except Exception:
         pass
     # 輸入全文
     if '_' in folder and len(folder[folder.rfind('_')+1:]) == 9 :
@@ -24,7 +24,7 @@ def main(folder = None, farm_name = None):
     try:
         farm_name = farm_name
         if farm_name == None: raise
-    except:
+    except Exception:
         print('牧場名不能為空')
     uniqueIDForThisGame = str(random.randint(0,999999999)).zfill(9)
     new_path = f'./{farm_name}_{uniqueIDForThisGame}'

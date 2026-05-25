@@ -130,7 +130,7 @@ combo_save = ttk.Combobox(ui_grid, width=27, values=core.find_saves(), state='re
 combo_save.grid(row=3, column=1, sticky='nsew')
 try:
     combo_save.current(0)
-except:
+except Exception:
     pass
 
 label_farm = tk.Label(ui_grid, text='請輸入新農場的名稱', font=('jf open 粉圓 2.1', 10), bg=color['root'], fg=color['label_farm_fg'])

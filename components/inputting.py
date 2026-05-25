@@ -148,7 +148,7 @@ def on_click(event, root, canvas):
                     selected_text = ''
                     select_side = 'Left'
                     selected_text = input_text[index:cursor_index_old] if not select_middle else input_text[index:select_middle]
-        except:
+        except Exception:
             cursor_index = len(input_text)
     else:
         cursor_index = 0
@@ -179,7 +179,7 @@ def on_drag(event, root, canvas, ui_font):
                     selected_text = list(boundaries.values())[dict_cursor-1]
                     select_side = 'Right'
                     select_middle = list(boundaries.keys())[dict_cursor-1]
-        except:
+        except Exception:
             pass
         draw_input(root, canvas, ui_font)
     else:
