@@ -3,7 +3,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from tkinter import font
 from inputting import draw_input 
 import time
-def resize(event, root, canvas, title1, title2, title3, title4, label_choose, label_farm, combo_save):
+def resize(event, root, canvas, title1, title2, title3, title4, label_choose, label_farm, combo_save, ui_font):
     if event.widget == root:
         
         canvas_new_width = int(event.width/1.25)
@@ -26,10 +26,10 @@ def resize(event, root, canvas, title1, title2, title3, title4, label_choose, la
         title4.config(font=current_font)
         
         font_size = max(8, event.width //60)
-        label_choose.config(font=('jf open 粉圓 2.1', font_size, 'bold'))
-        label_farm.config(font=('jf open 粉圓 2.1', font_size, 'bold'))
+        label_choose.config(font=( ui_font, font_size, 'bold'))
+        label_farm.config(font=( ui_font, font_size, 'bold'))
         
         font_size = max(8, event.width //60)
-        combo_save.config(font=('jf open 粉圓 2.1', font_size, ))
+        combo_save.config(font=( ui_font, font_size, ))
         time.sleep(0)
-        root.option_add('*TCombobox*Listbox.font', ('jf open 粉圓 2.1', font_size, 'bold'))
+        root.option_add('*TCombobox*Listbox.font', ( ui_font, font_size, 'bold'))
