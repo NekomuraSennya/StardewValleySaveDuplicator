@@ -88,6 +88,7 @@ def clean_raise(exception = None, lasti_move = 0):
             tb_lasti = lasti,
             tb_lineno = f.f_lineno
         )
+        
     if not is_inside_try():
         sys.__excepthook__(type(exception), exception, traceback)
     silent_raise(exception)
