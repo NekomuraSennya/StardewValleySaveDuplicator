@@ -1,16 +1,20 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, font
 import core, sys, json, os, time
-from functions import empty_warning, resize
-from functions.color_converter import color_converter as ccv
-from functions import inputting, speech_resize
-from functions.load_custom_fonts import load_custom_font
+from components import empty_warning, resize
+from components.color_converter import color_converter as ccv
+from components import inputting, speech_resize
+from components.load_custom_fonts import load_custom_font
+
+
 
 os.chdir(f'C:/Users/{os.environ.get('USERNAME')}/AppData/Roaming/StardewValley/Saves')
 project_path = os.path.dirname(os.path.abspath(__file__))
 
-load_custom_font('PopGothicCjkTc-Bold.ttf')
-load_custom_font('jf-openhuninn-2.1.ttf')
+tilte_font_exist = load_custom_font('PopGothicCjkTc-Bold.ttf')
+title_font = '大波浪圓體 CJK TC-Bold' if tilte_font_exist else 'Arial'
+ui_font_exist = load_custom_font('jf-openhuninn-2.1.ttf')
+ui_font = 'jf open 粉圓 2.1' if ui_font_exist else 'Arial'
 
 with open(f'{project_path}/theme.json', 'r') as f:
     with open(f'{project_path}/config.json', 'r') as g:
@@ -75,7 +79,6 @@ style.configure(
 kground = 'f7edc6',
     arrowcolor = 999481
 )
-
 style.map(
     'Stardew.TCombobox',
     fieldbackground=[('readonly', '#f7edc6')],
@@ -87,7 +90,6 @@ root.grid_columnconfigure(0, weight=1)
 root.grid_rowconfigure(0, weight=1)
 root.grid_rowconfigure(1, weight=1)
 
-
 title_grid = tk.Frame(root, bg=color['root'])
 title_grid.grid(row=0, column=0, sticky='we')
 
@@ -97,10 +99,10 @@ title_grid.columnconfigure(1, weight=1)
 title = tk.Frame(title_grid)
 title.grid(row=0, column=1, pady=(40, 0))
 
-title1 = tk.Label(title, text='星露谷物語', font=('大波浪圓體 CJK TC-Bold', 20, 'bold'), bg=color['root'], fg=color['title1_fg'])
-title2 = tk.Label(title, text='存檔', font=('大波浪圓體 CJK TC-Bold', 20, 'bold'), bg=color['root'], fg=color['title2_fg'])
-title3 = tk.Label(title, text='複製', font=('大波浪圓體 CJK TC-Bold', 20, 'bold'), bg=color['root'], fg=color['title3_fg'])
-title4 = tk.Label(title, text='小工具', font=('大波浪圓體 CJK TC-Bold', 20, 'bold'), bg=color['root'], fg=color['title4_fg'])
+title1 = tk.Label(title, text='星露谷物語', font=(title_font, 20, 'bold'), bg=color['root'], fg=color['title1_fg'])
+title2 = tk.Label(title, text='存檔', font=(title_font, 20, 'bold'), bg=color['root'], fg=color['title2_fg'])
+title3 = tk.Label(title, text='複製', font=(title_font, 20, 'bold'), bg=color['root'], fg=color['title3_fg'])
+title4 = tk.Label(title, text='小工具', font=(title_font, 20, 'bold'), bg=color['root'], fg=color['title4_fg'])
 
 title1.pack(side='left')
 title2.pack(side='left')
@@ -123,17 +125,17 @@ ui_grid.rowconfigure(7, weight=1)
 for i in range(8):
     ui_grid.rowconfigure(i, weight=1)
 
-label_choose = tk.Label(ui_grid, text='請選擇要複製的存檔', font=('jf open 粉圓 2.1', 10), bg=color['root'], fg=color['label_choose_fg'])
+label_choose = tk.Label(ui_grid, text='請選擇要複製的存檔', font=(ui_font, 10), bg=color['root'], fg=color['label_choose_fg'])
 label_choose.grid(row=2, column=1)
 
-combo_save = ttk.Combobox(ui_grid, width=27, values=core.find_saves(), state='readonly', style='Stardew.TCombobox', font=('jf open 粉圓 2.1', 10, 'bold'))
+combo_save = ttk.Combobox(ui_grid, width=27, values=core.find_saves(), state='readonly', style='Stardew.TCombobox', font=(ui_font, 10, 'bold'))
 combo_save.grid(row=3, column=1, sticky='nsew')
 try:
     combo_save.current(0)
 except Exception:
     pass
 
-label_farm = tk.Label(ui_grid, text='請輸入新農場的名稱', font=('jf open 粉圓 2.1', 10), bg=color['root'], fg=color['label_farm_fg'])
+label_farm = tk.Label(ui_grid, text='請輸入新農場的名稱', font=(ui_font, 10), bg=color['root'], fg=color['label_farm_fg'])
 label_farm.grid(row=4, column=1, sticky='news')
 
 canvas = tk.Canvas(ui_grid, bd=0, height=0, width=0, highlightthickness=False, cursor='xterm')
@@ -156,13 +158,15 @@ folder_images = [folder_image_0, folder_image_1, folder_image_2]
 folder_button = tk.Button(ui_grid, command=openfolder, image=folder_images[int(color['folder'])], bg=color['root'], borderwidth=0, highlightthickness=False, activebackground=color['root'])
 folder_button.place(relx=1, rely=1, anchor='se')
 
-version = tk.Label(ui_grid, text="v1.0.0.3 by SennyaOwO", font=('jf open 粉圓 2.1', 8, 'bold'),bg=color['root'],fg='#ffffff')
+version = tk.Label(ui_grid, text="v1.0.0.3 by SennyaOwO", font=(ui_font, 8, 'bold'),bg=color['root'],fg='#ffffff')
 version.place(anchor='sw',relx=0,rely=1)
-root.bind('<Configure>', lambda event: (resize.resize(event, root, canvas, title1, title2, title3, title4, label_choose, label_farm, combo_save)))
+root.bind('<Configure>', lambda event: (resize.resize(event, root, canvas, title1, title2, title3, title4, label_choose, label_farm, combo_save, ui_font)))
 canvas.bind('<Button-1>', lambda event: inputting.on_click(event, root, canvas))
-canvas.bind('<Key>', lambda event: (inputting.on_key(event, root), inputting.draw_input(root, canvas)))
+canvas.bind('<B1-Motion>', lambda event: inputting.on_drag(event, root, canvas, ui_font))
+canvas.bind('ButtonRelease-1', inputting.on_release())
+canvas.bind('<Key>', lambda event: (inputting.on_key(event, root), inputting.draw_input(root, canvas, ui_font)))
 canvas.bind('<Configure>', lambda event: (speech_resize.on_window_trigger(root, canvas),
                                         inputting.draw_speech(event, canvas, color, [247, 237, 198], is_empty_warning=False)))
-inputting.blink(root, canvas)
+inputting.blink(root, canvas, ui_font)
 
 root.mainloop()
