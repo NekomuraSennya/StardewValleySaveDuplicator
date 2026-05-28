@@ -1,22 +1,24 @@
-import os, sys
-sys.path.append(os.path.dirname(__file__))
+from sys import path
+from os.path import dirname
+path.append(dirname(__file__))
+import components.global_vars as gv
 
 resize_timer = None
 
-def on_window_trigger(root, canvas):
+def on_window_trigger():
     global resize_timer
     
     if resize_timer is not None:
-        root.after_cancel(resize_timer)
+        gv.root.after_cancel(resize_timer)
         
-    resize_timer = root.after(150, lambda: perform_final_resize(root, canvas))
+    resize_timer = gv.root.after(150, lambda: perform_final_resize())
 
-def perform_final_resize(root, canvas):
+def perform_final_resize():
     import inputting
     class VirtualEvent:
         def __init__(self, w, h):
             self.width = w
             self.height = h
-    v_event = VirtualEvent(canvas.winfo_width(), canvas.winfo_height())
+    v_event = VirtualEvent(gv.canvas.winfo_width(), gv.canvas.winfo_height())
     
-    inputting.draw_input(root, canvas)
+    inputting.draw_input()

@@ -1,3 +1,7 @@
+from sys import path
+from os.path import dirname
+path.append(dirname(__file__))
+import components.global_vars as gv
 import ctypes, os
 
 def load_custom_font(path):
