@@ -5,15 +5,15 @@ color = {}
 
 root = None
 
-title1 = tk.Label()
-title2 = tk.Label()
-title3 = tk.Label()
-title4 = tk.Label()
+title1 = None
+title2 = None
+title3 = None
+title4 = None
 
-label_choose = tk.Label()
-label_farm = tk.Label()
+label_choose = None
+label_farm = None
 
-canvas = tk.Canvas()
+canvas = None
 
-combo_save = ttk.Combobox()
+combo_save = None
 ui_font = ""
